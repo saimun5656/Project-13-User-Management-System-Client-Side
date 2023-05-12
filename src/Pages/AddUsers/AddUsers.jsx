@@ -1,4 +1,5 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 
 const AddUsers = () => {
     const handleSubmit=(event)=>{
@@ -6,7 +7,25 @@ const AddUsers = () => {
            const form =event.target;
            const gender=form.gender.value;
            const status=form.status.value;
-           console.log(gender,status);
+           const name= form.name.value;
+           const email=form.email.value;
+           const newuser={gender,status,name,email}
+           console.log(newuser);
+           fetch('http://localhost:3400/adduser',{
+            method:"POST",
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify(newuser)
+           })
+           .then(res=>res.json())
+           .then(data=>{
+            Swal.fire({
+                title: 'Success',
+                text: 'User added successfully',
+                icon: 'success',
+                confirmButtonText: 'ok'
+              })
+            console.log(data);
+           })
     }
     return (
 
@@ -18,15 +37,15 @@ const AddUsers = () => {
 
             <div className="form-control">
                 <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">Name</span>
                 </label>
-                <input type="text" placeholder="email" className="input rounded-sm" />
+                <input type="text" placeholder="Your Name" className="input rounded-sm" name='name'/>
             </div>
             <div className="form-control">
                 <label className="label">
                 <span className="label-text">Email</span>
                 </label>
-                <input type="text" placeholder="email" className="input rounded-sm" />
+                <input type="email" placeholder="Your Email" className="input rounded-sm" name='email'/>
             </div>
             <div className='w-1/3   grid grid-cols-3 my-5'>
                 <span className=''>Gender </span> 
