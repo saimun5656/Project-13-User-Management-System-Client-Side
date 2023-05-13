@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const AddUsers = () => {
@@ -28,8 +29,9 @@ const AddUsers = () => {
            })
     }
     return (
-
-        <form onSubmit={handleSubmit} className='md:w-9/12 mx-auto'>
+     <div className='md:w-9/12 mx-auto mt-12'>
+          <Link to='/'><button className='font-semibold shadow-md px-5 py-1 rounded-md bg-slate-100'>All Users</button></Link>
+          <form onSubmit={handleSubmit} >
             <div className='text-center'>
                 <h1 className='text-4xl font-semibold'>New User</h1>
                 <p>Use the below form to create a new account</p>
@@ -67,6 +69,7 @@ const AddUsers = () => {
             </div>
             <input className='bg-rose-400 px-4 py-1 rounded w-full' type="submit" value="Create" />
         </form>
+     </div>
     );
 };
 
